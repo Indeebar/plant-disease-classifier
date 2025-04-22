@@ -1,5 +1,4 @@
 import streamlit as st
-st.set_page_config(page_title="🌿 Plant Disease Classifier", layout="centered")
 import os
 import requests
 import streamlit as st
@@ -8,7 +7,7 @@ from tensorflow.keras.models import load_model
 from PIL import Image
 import numpy as np
 
-
+st.set_page_config(page_title="🌿 Plant Disease Classifier", layout="centered")
 
 # Check and download the model if not exists
 model_path = "plant_disease_model.h5"
