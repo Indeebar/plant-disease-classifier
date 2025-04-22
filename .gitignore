@@ -1,0 +1,20 @@
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# Model file
+*.h5
+
+# Python
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.idea/

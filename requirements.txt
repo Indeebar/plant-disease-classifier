@@ -1,0 +1,6 @@
+numpy
+streamlit
+tensorflow==2.18.0
+Pillow
+gdown
+
