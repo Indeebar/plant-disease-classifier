@@ -1,19 +1,16 @@
 import streamlit as st
+st.set_page_config(page_title="🌿 Plant Disease Classifier", layout="centered")
+
 import os
-import requests
-import streamlit as st
+import gdown
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 from PIL import Image
 import numpy as np
 
-st.set_page_config(page_title="🌿 Plant Disease Classifier", layout="centered")
-
 # Check and download the model if not exists
 model_path = "plant_disease_model.h5"
 if not os.path.exists(model_path):
-    # Google Drive direct download via gdown
-    import gdown
     file_id = "1-3nE1XiZLK--iinHtT0H1b5paZZLecsO"
     url = f"https://drive.google.com/uc?id={file_id}"
     st.info("⬇️ Downloading model from Google Drive...")
@@ -53,9 +50,7 @@ def predict_image_class(image):
     confidence = prediction[predicted_index]
     return class_labels[predicted_index], confidence, prediction
 
-# Streamlit UI
-st.set_page_config(page_title="🌿 Plant Disease Classifier", layout="centered")
-
+# Sidebar
 with st.sidebar:
     st.title("🌾 PlantDoc")
     st.markdown("Upload an image of a plant leaf to detect possible diseases using a CNN model.")
@@ -65,6 +60,7 @@ with st.sidebar:
     st.markdown("🔬 **Input size:** 128x128")
     st.markdown("📈 **Output:** Disease prediction and confidence")
 
+# Main Interface
 st.title("🌿 Plant Disease Detection App")
 st.caption("Identify plant diseases from leaf images in seconds.")
 
@@ -82,6 +78,7 @@ if uploaded_file:
         st.markdown(f"**🧪 Detected Disease:** `{label}`")
         st.markdown(f"**📊 Confidence:** `{confidence * 100:.2f}%`")
 
+        # Top 5 Predictions
         top_k = 5
         top_indices = np.argsort(prediction_array)[-top_k:][::-1]
         top_labels = [class_labels[i] for i in top_indices]
@@ -96,5 +93,3 @@ if uploaded_file:
 
 else:
     st.info("👈 Upload an image from the sidebar to get started.")
-
-
